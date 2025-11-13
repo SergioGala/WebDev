@@ -1,0 +1,349 @@
+
+/*  Responsive ajustes generales --------------------------*/
+
+@media (max-width: 1200px) {
+  .border {
+    padding: 30px 0px;
+    border-bottom: solid white 1px;
+  }
+
+  .animated-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .arrow-circle.right {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #333;
+    color: #ccc;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .legal-links-list{
+    max-width: 82%;
+  }
+  .footer {
+    align-items: start;
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer > div {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .trampoline-list,
+  .legal-links-list {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .animated-button {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .social-footer {
+    align-items: center;
+  }
+}
+
+
+/*  Footer layout principal --------------------------------*/
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+
+/*  Sección social del footer -----------------------------*/
+
+.social-footer-wrapper {
+  justify-items: start;
+  width: 100%;
+}
+
+.social-footer {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding: 40px 0px;
+  align-items: anchor-center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.circle {
+  border: solid 1px gray;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  opacity: 1;
+}
+
+.animate {
+  animation: slideOnce 0.6s ease-in-out forwards;
+  order: 2;
+}
+
+
+/* Botón boletín / AnimatedAnchorTag --------------------------*/
+
+.animated-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  padding-left: 40px;
+  padding-right: 50px;
+  justify-content: space-between;
+}
+
+.animated-button:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.button-text {
+  transition: transform 0.2s ease;
+  text-align: start;
+  margin: 0px 10px;
+}
+
+.responsive-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/*  Flechas animadas dentro del botón ------------------------------*/
+
+.arrow-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  background-color: #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  position: absolute;
+  transition: transform 0.3s ease, opacity 0.4s ease;
+}
+
+.arrow-circle.left {
+  left: 0;
+  transform: scale(0) translateX(-20px);
+  opacity: 0;
+}
+
+.arrow-circle.right {
+  right: 0;
+  transform: scale(1) translateX(0);
+  opacity: 1;
+  position: static;
+  margin-left: auto;
+}
+
+.animated-button:hover .arrow-circle.right {
+  transform: scale(0) translateX(20px);
+  opacity: 0;
+}
+
+.animated-button:hover .arrow-circle.left {
+  transform: scale(1) translateX(0);
+  opacity: 1;
+}
+
+.animated-button:hover .button-text {
+  transform: translateX(12px);
+}
+
+
+/*  Listas de enlaces legales ------------------------*/
+
+.legal-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+
+}
+
+.legal-links-list li {
+  padding-left: 0;
+  margin-left: 0;
+  width: 100%;
+  text-align: start;
+}
+
+
+/*  Lista de botones trampolín ------------------------*/
+
+.trampoline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.trampoline-button {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.trampoline-button,
+.trampoline-button:link,
+.trampoline-button:visited,
+.trampoline-button:hover,
+.trampoline-button:focus,
+.trampoline-button:active {
+  color: white;
+  text-decoration: none;
+}
+
+
+/*  Etiqueta animada del botón trampolín ------------------*/
+
+.label-wrapper {
+  font-size: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.button-label {
+  display: inline-block;
+}
+
+
+/*  Punto animado del trampolín --------------------------*/
+
+.bullet-dot {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.6s ease;
+}
+
+.trampoline-button:hover .bullet-dot {
+  animation: dotFall 0.4s ease forwards;
+  opacity: 1;
+}
+
+.trampoline-button:hover .label-wrapper {
+  animation: bounceOnce 0.6s ease forwards;
+}
+
+.trampoline-button:not(:hover) .bullet-dot {
+  opacity: 0;
+  animation: none;
+  transform: translateY(0);
+}
+
+
+/*  Animaciones keyframes ---------------*/
+
+@keyframes slideOnce {
+  0% {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  40% {
+    left: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  45% {
+    left: 0%;
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  80% {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  100% {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+}
+
+@keyframes dotFall {
+  0% {
+    transform: translateY(-16px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceOnce {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(3px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
