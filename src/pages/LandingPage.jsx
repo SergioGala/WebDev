@@ -1,4 +1,6 @@
 import PartnerSection from "../components/Layout/PartnerSection/PartnerSection";
+import BlogList from "../components/Blogs/BlogList";
+
 
 const LandingPage = () => {
 
@@ -8,6 +10,8 @@ const LandingPage = () => {
     <>
      <h1>Buenas tardes</h1>
      <PartnerSection/>
+ <BlogList/>
+ <BlogList/>
     </>
     )
 }

@@ -1,14 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useIsMobile = (breakpoint = 1200) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
+    const checkWidth = () => {
       setIsMobile(window.innerWidth <= breakpoint);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    checkWidth(); // ejecutar al montar
+
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
   }, [breakpoint]);
 
   return isMobile;
