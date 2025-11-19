@@ -1,3 +1,4 @@
+import PartnerSection from "../components/Layout/PartnerSection/PartnerSection";
 
 const LandingPage = () => {
 
@@ -6,6 +7,7 @@ const LandingPage = () => {
 
     <>
      <h1>Buenas tardes</h1>
+     <PartnerSection/>
     </>
     )
 }
