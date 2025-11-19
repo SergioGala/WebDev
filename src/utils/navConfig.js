@@ -1,99 +1,134 @@
+// src/config/navConfig.js
+
 /**
- * Navigation Configuration
- * Configuración centralizada de navegación de sitio
+ * Navigation Configuration - Monks Style
+ * Con "Solutions by Industry" para SEO
  */
 
 export const navItems = [
   {
-    label: 'Solutions',
+    label: 'Solutions',  
     hasDropdown: true,
     dropdownItems: [
       {
-        label: 'Desarrollo Web',
-        href: '/solutions/web-development',
-        description: 'Aplicaciones web modernas con React'
+        label: 'Real-Time Brands',
+        href: '/Real-Time/Brands',
       },
       {
-        label: 'Apps Móviles',
-        href: '/solutions/mobile-apps',
-        description: 'Apps nativas y cross-platform'
+        label: 'Marketing Orchestration',
+        href: '/solutions/Marketing Orchestration',
       },
       {
-        label: 'Cloud Solutions',
-        href: '/solutions/cloud',
-        description: 'Infraestructura escalable en la nube'
+        label: 'Glass Box Media',
+        href: '/solutions/glass',
+      },
+      {
+        label: 'Retail, CPG & E-commerce',
+        href: '/solutions/retail-ecommerce',
+      },
+      {
+        label: 'Life Sciences & Healthcare',
+        href: '/solutions/healthcare',
+      },
+      {
+        label: 'Real Estate, Technology, Public Sector & Education',
+        href: '/solutions/real-estate-tech',
       }
     ]
   },
   {
-    label: 'Services',
+    label: 'Marketing Services',
     hasDropdown: true,
     dropdownItems: [
       {
-        label: 'Consulting Services',
+        label: 'Brand',
         href: '/services/consulting',
-        description: 'Asesoría técnica y estratégica'
-      },
-      {
-        label: 'Mantenimiento',
-        href: '/services/maintenance',
-        description: 'Soporte continuo y actualizaciones'
       },
       {
         label: 'Custom Software & Digital Platforms',
         href: '/services/custom-software',
-        description: 'Desarrollo a medida'
       },
       {
         label: 'QA & Automation Testing',
         href: '/services/qa-testing',
-        description: 'Testing automatizado y manual'
       },
       {
         label: 'Cloud & Infrastructure',
         href: '/services/cloud-infrastructure',
-        description: 'DevOps y arquitectura cloud'
       },
       {
         label: 'Data, AI & Automation',
         href: '/services/ai-automation',
-        description: 'Soluciones con IA y automatización'
       },
       {
         label: 'Security',
         href: '/services/security',
-        description: 'Auditorías y seguridad informática'
+      }
+    ]
+  },
+    {
+    label: 'Technology Services',  // ← NUEVO
+    hasDropdown: true,
+    dropdownItems: [
+      {
+        label: 'Cloud Infrastructure',
+        href: '/technology/cloud',
+        description: 'Escalabilidad y seguridad'
+      },
+      {
+        label: 'DevOps & CI/CD',
+        href: '/technology/devops',
+        description: 'Automatización y deployment'
+      },
+      {
+        label: 'API Development',
+        href: '/technology/api',
+        description: 'Integraciones robustas'
+      },
+      {
+        label: 'Database Solutions',
+        href: '/technology/database',
+        description: 'PostgreSQL, MongoDB, Redis'
       }
     ]
   },
   {
-    label: 'Portfolio',
-    hasDropdown: false,
-    href: '/portfolio'
-  },
-  {
-    label: 'Price',
-    hasDropdown: false,
-    href: '/pricing'
+    label: 'Products & Methods',  // ← Como Monks
+    hasDropdown: true,
+    dropdownItems: [
+      {
+        label: 'Agile Development',
+        href: '/methods/agile',
+      },
+      {
+        label: 'DevOps & CI/CD',
+        href: '/methods/devops',
+      },
+      {
+        label: 'Design Thinking',
+        href: '/methods/design-thinking',
+      }
+    ]
   },
   {
     label: 'About Us',
     hasDropdown: true,
     dropdownItems: [
       {
-        label: 'Equipo',
-        href: '/about/team',
-        description: 'Conoce a nuestro equipo'
+        label: 'What We Do',
+        href: '/insights/blog',
       },
       {
-        label: 'Proceso',
-        href: '/about/process',
-        description: 'Cómo trabajamos'
+        label: 'Partners',
+        href: '/insights/case-studies',
       },
       {
-        label: 'Contacto',
-        href: '/about/contact',
-        description: 'Hablemos de tu proyecto'
+        label: 'Thinking',
+        href: '/insights/whitepapers',
+      },
+      {
+        label: 'Careers',
+        href: '/insights/Careers',
       }
     ]
   }
@@ -101,21 +136,12 @@ export const navItems = [
 
 // CTA Button Config
 export const ctaButton = {
-  label: "Let's Talk",
+  label: "Connect",  
   href: '/contact',
-  onClick: () => {
-    // Aquí podrías abrir un modal de contacto
-    // O redirigir a Calendly
-    // O abrir WhatsApp
-    console.log('CTA clicked');
-  }
 };
 
 // Logo Config
 export const logoConfig = {
-  text: '.CopiaSergio',
+  text: '.copiasergio', 
   href: '/',
-  // Si quieres imagen en lugar de texto:
-  // image: '/logo.png',
-  // alt: 'CopiaSergio Logo'
 };

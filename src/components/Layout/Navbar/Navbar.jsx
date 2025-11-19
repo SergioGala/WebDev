@@ -1,58 +1,30 @@
 import { useState, useEffect } from 'react';
-import { ChevronDown, ArrowRight, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import { useScrollBehavior } from '../../../hooks/useScrollBehavior';
+import useIsMobile from '../../../hooks/useIsMobile';
+import { navItems, ctaButton, logoConfig } from '../../../utils/Navconfig';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, isVisible } = useScrollBehavior(10, 200);
+  const isMobile = useIsMobile(1200);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null);
 
-  // Navigation items
-  const navItems = [
-    {
-      label: 'Solutions',
-      hasDropdown: true,
-      dropdownItems: ['Desarrollo Web', 'Apps Móviles', 'Cloud Solutions']
-    },
-    {
-      label: 'Services',
-      hasDropdown: true,
-      dropdownItems: ['Consulting Services', 'Mantenimiento','Custom Software & Digital Platforms','QA & Automation Testing','Cloud & Infrastructure','Data, AI & Automation','Security']
-    },
-    {
-      label: 'Portfolio',
-      hasDropdown: false,
-      href: '/portfolio'
-    },
-    {
-      label: 'Price',
-      hasDropdown: false,
-      href: '/precios'
-    },
-    {
-      label: 'About Us',
-      hasDropdown: true,
-      dropdownItems: ['Equipo', 'Proceso', 'Contacto']
-    }
-  ];
 
-  useEffect(() => {
-    // Scroll detection for navbar shrink effect
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+  // Cerrar dropdown/menu al hacer click fuera
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      if (activeDropdown !== null) {
+        const clickedOutside = !event.target.closest(`.${styles.item}`);
+        if (clickedOutside) {
+          setActiveDropdown(null);
+        }
+      }
+
       if (isMobileMenuOpen && !event.target.closest(`.${styles.navbar}`)) {
         setIsMobileMenuOpen(false);
       }
@@ -60,16 +32,24 @@ const Navbar = () => {
 
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, activeDropdown]);
+
+  // Cerrar dropdowns al redimensionar
+
+  useEffect(() => {
+    setActiveDropdown(null);
+    setMobileActiveDropdown(null);
+    setIsMobileMenuOpen(false);
+  }, [isMobile]);
 
   return (
-    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${!isVisible ? styles.hidden : ''}`}>
       <div className={styles.container}>
         {/* Logo */}
         <div className={styles.logo}>
-          <a href="/" className={styles.logoLink}>
-            .CopiaSergio
-          </a>
+          <Link to={logoConfig.href} className={styles.logoLink}>
+            {logoConfig.text}
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -78,57 +58,83 @@ const Navbar = () => {
             <div
               key={index}
               className={styles.item}
-              onMouseEnter={() => item.hasDropdown && setActiveDropdown(index)}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseEnter={() => {
+                if (item.hasDropdown) {
+                  setActiveDropdown(index);
+                }
+              }}
+              onMouseLeave={() => {
+                if (item.hasDropdown) {
+                  setActiveDropdown(null);
+                }
+              }}
             >
-              <a 
-                href={item.href || '#'} 
-                className={styles.link}
-              >
-                {item.label}
-                {item.hasDropdown && (
-                  <ChevronDown
-                    size={16}
-                    className={`${styles.chevron} ${
-                      activeDropdown === index ? styles.chevronActive : ''
-                    }`}
-                  />
-                )}
-              </a>
+              {item.hasDropdown ? (
+                <span className={styles.link}>
+                  {item.label}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className={`${styles.chevron} ${activeDropdown === index ? styles.chevronActive : ''}`}
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M2.55806 6.29544C2.46043 6.19781 2.46043 6.03952 2.55806 5.94189L3.44195 5.058C3.53958 4.96037 3.69787 4.96037 3.7955 5.058L8.00001 9.26251L12.2045 5.058C12.3021 4.96037 12.4604 4.96037 12.5581 5.058L13.4419 5.94189C13.5396 6.03952 13.5396 6.19781 13.4419 6.29544L8.17678 11.5606C8.07915 11.6582 7.92086 11.6582 7.82323 11.5606L2.55806 6.29544Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              ) : (
+                <Link to={item.href} className={styles.link}>
+                  {item.label}
+                </Link>
+              )}
 
               {/* Dropdown Menu */}
-              {item.hasDropdown && (
-                <div
-                  className={`${styles.dropdown} ${
-                    activeDropdown === index ? styles.dropdownActive : ''
-                  }`}
-                >
+              {item.hasDropdown && activeDropdown === index && (
+                <div className={styles.dropdown}>
                   {item.dropdownItems.map((dropItem, dropIndex) => (
-                    <a
+                    <Link
                       key={dropIndex}
-                      href="#"
+                      to={dropItem.href}
                       className={styles.dropdownItem}
+                      onClick={() => setActiveDropdown(null)}
                     >
-                      {dropItem}
-                    </a>
+                      <div className={styles.dropdownItemContent}>
+                        <span className={styles.dropdownItemLabel}>
+                          {dropItem.label}
+                        </span>
+                        {dropItem.description && (
+                          <span className={styles.dropdownItemDesc}>
+                            {dropItem.description}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
                   ))}
                 </div>
               )}
             </div>
           ))}
         </div>
+        {/* CTA Button - CON FLECHA ANIMADA */}
 
-        {/* CTA Button */}
         <div className={styles.cta}>
-          <button className={styles.button}>
-            Let's Talk
-            <ArrowRight size={18} className={styles.buttonIcon} />
-          </button>
+          <Link to={ctaButton.href}>
+            <button className={`${styles.button} ${isScrolled ? styles.inverseButton : ''}`}>
+              <span className={styles.arrowCircleLeft}>→</span>
+              <span className={styles.buttonText}>{ctaButton.label}</span>
+              <span className={styles.arrowCircleRight}>→</span>
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
         <button
-          className={styles.mobileToggle}
+          className={`${styles.mobileToggle} ${!isVisible ? styles.mobileToggleVisible : ''}`}
           onClick={(e) => {
             e.stopPropagation();
             setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -139,56 +145,78 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`${styles.mobileMenu} ${
-          isMobileMenuOpen ? styles.mobileMenuActive : ''
-        }`}
-      >
-        {navItems.map((item, index) => (
-          <div key={index} className={styles.mobileItem}>
-            <div
-              className={styles.mobileLink}
-              onClick={() => 
-                item.hasDropdown && 
-                setActiveDropdown(activeDropdown === index ? null : index)
-              }
-            >
-              {item.label}
-              {item.hasDropdown && (
-                <ChevronDown
-                  size={16}
-                  className={`${styles.mobileChevron} ${
-                    activeDropdown === index ? styles.mobileChevronActive : ''
-                  }`}
-                />
+      {isMobile && (
+        <div
+          className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuActive : ''}`}
+        >
+          {navItems.map((item, index) => (
+            <div key={index} className={styles.mobileItem}>
+              {item.hasDropdown ? (
+                <>
+                  <div
+                    className={styles.mobileLink}
+                    onClick={() =>
+                      setMobileActiveDropdown(mobileActiveDropdown === index ? null : index)
+                    }
+                  >
+                    {item.label}
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className={`${styles.chevron} ${mobileActiveDropdown === index ? styles.chevronActive : ''}`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M2.55806 6.29544C2.46043 6.19781 2.46043 6.03952 2.55806 5.94189L3.44195 5.058C3.53958 4.96037 3.69787 4.96037 3.7955 5.058L8.00001 9.26251L12.2045 5.058C12.3021 4.96037 12.4604 4.96037 12.5581 5.058L13.4419 5.94189C13.5396 6.03952 13.5396 6.19781 13.4419 6.29544L8.17678 11.5606C8.07915 11.6582 7.92086 11.6582 7.82323 11.5606L2.55806 6.29544Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+
+                  {mobileActiveDropdown === index && (
+                    <div className={styles.mobileDropdown}>
+                      {item.dropdownItems.map((dropItem, dropIndex) => (
+                        <Link
+                          key={dropIndex}
+                          to={dropItem.href}
+                          className={styles.mobileDropdownItem}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setMobileActiveDropdown(null);
+                          }}
+                        >
+                          {dropItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  to={item.href}
+                  className={styles.mobileLink}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
               )}
             </div>
-
-            {/* Mobile Dropdown */}
-            {item.hasDropdown && activeDropdown === index && (
-              <div className={styles.mobileDropdown}>
-                {item.dropdownItems.map((dropItem, dropIndex) => (
-                  <a
-                    key={dropIndex}
-                    href="#"
-                    className={styles.mobileDropdownItem}
-                  >
-                    {dropItem}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-
-        <button className={`${styles.button} ${styles.buttonMobile}`}>
-          Hablemos
-          <ArrowRight size={18} />
-        </button>
-      </div>
+          ))}
+          {/* BOTON VERSION MOBILE */}
+          <Link to={ctaButton.href} onClick={() => setIsMobileMenuOpen(false)}>
+            <button className={`${styles.button} ${isScrolled ? styles.inverseButton : ''}`}>
+              <span className={styles.arrowCircleLeft}>→</span>
+              <span className={styles.buttonText}>{ctaButton.label}</span>
+              <span className={styles.arrowCircleRight}>→</span>
+            </button>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 };
 
 export default Navbar;
-
