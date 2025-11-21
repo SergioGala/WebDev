@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Blog.css";
+import "./SpecialButton.css";
 
 const SpecialButton = ({ to = "/"}) => {
   const [hovered, setHovered] = useState(false);

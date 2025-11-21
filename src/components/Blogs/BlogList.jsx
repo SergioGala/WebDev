@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import AnimatedAnchorTagBlog from "./AnimatedAnchorTagBlog";
+
 import "./Blog.css";
-import SpecialButton from "./SpecialButton";
 import useIsMobile from "../../hooks/UseIsMobile";
+import SpecialButton from "../SpecialButton/SpecialButton";
+import AnimatedAnchorTag from "../Footer/AnimatedAnchorTag";
+
 
 const BlogList = () => {
   const isMobile = useIsMobile(1200);
@@ -133,7 +135,7 @@ const BlogList = () => {
               {isMobile ? (
                 <SpecialButton to={post.to} />
               ) : (
-                <AnimatedAnchorTagBlog text="Leer ahora" to={post.to} />
+                <AnimatedAnchorTag className="anchortag-blog" text="Leer ahora" to={post.to} />
               )}
             </div>
           </div>

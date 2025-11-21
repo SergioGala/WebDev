@@ -1,9 +1,9 @@
 import React from 'react';
 import TrampolineButton from './TrampolineButton';
-import AnimatedAnchorTag from './AnimatedAnchorTag';
-import useIsMobile from '../../../hooks/UseIsMobile';
 import SocialFooter from './SocialFooter';
 import "./Footer";
+import AnimatedAnchorTag from './AnimatedAnchorTag';
+import useIsMobile from '../../hooks/UseIsMobile';
 
 const Footer = () => {
   const isMobile = useIsMobile();

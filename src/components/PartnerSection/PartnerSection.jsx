@@ -1,10 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { partnerServices } from '../../../data/patnerServices';
+import { partnerServices } from '../../data/patnerServices';
 import './PartnerSection.css';
-import SpecialButton from '../../Blogs/SpecialButton';
-
-
-
+import SpecialButton from '../SpecialButton/SpecialButton';
 
 function PartnerCard({ service }) {
     const navigate = useNavigate()
