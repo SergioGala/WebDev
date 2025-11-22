@@ -1,9 +1,10 @@
 import React from 'react';
 import TrampolineButton from './TrampolineButton';
-import AnimatedAnchorTag from './AnimatedAnchorTag';
-import useIsMobile from '../../../hooks/UseIsMobile';
 import SocialFooter from './SocialFooter';
 import "./Footer";
+import AnimatedAnchorTag from './AnimatedAnchorTag';
+import useIsMobile from '../../hooks/UseIsMobile';
+
 const Footer = () => {
   const isMobile = useIsMobile();
 
@@ -34,14 +35,15 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer">
+
         <div>
           <p>Sigue explorando...</p>
         </div>
 
         <div className='border'>
           <ul className={isMobile ? 'legal-links-list' : 'trampoline-list'}>
-            {navItems.map(({ text, href }) => (
-              <li key={text}>
+            {navItems.map(({ text, href }, i) => (
+              <li key={i}>
                 {isMobile ? (
                   <AnimatedAnchorTag text={text} href={href} fontSize="30px" />
                 ) : (
@@ -52,18 +54,20 @@ const Footer = () => {
           </ul>
         </div>
 
+        {/* LEGAL LINKS */}
         <div className='border'>
           <ul className="legal-links-list">
-            {legalLinks.map(({ text, href }) => (
-              <li key={text}>
-                <AnimatedAnchorTag text={text} href={href} fontSize="15px"/>
+            {legalLinks.map(({ text, href }, i) => (
+              <li key={i}>
+                <AnimatedAnchorTag text={text} href={href} fontSize="15px" />
               </li>
             ))}
           </ul>
         </div>
+
       </div>
 
-      <SocialFooter />  
+      <SocialFooter />
     </footer>
   );
 };

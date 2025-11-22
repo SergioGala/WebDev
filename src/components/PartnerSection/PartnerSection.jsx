@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { partnerServices } from '../../../data/patnerServices';
+import { partnerServices } from '../../data/patnerServices';
 import './PartnerSection.css';
+import SpecialButton from '../SpecialButton/SpecialButton';
 
 function PartnerCard({ service }) {
     const navigate = useNavigate()
@@ -24,8 +25,8 @@ function PartnerCard({ service }) {
 
             <div className="partner-card__content">
                 <span className="partner-card__label">{service.label}</span>
-
-                <button
+                    
+                 <button
                     className="partner-card__cta"
                     type="button"
                     onClick={(e) => {
@@ -33,16 +34,9 @@ function PartnerCard({ service }) {
                         handleClick();
                     }}
                 >
-                    <span>{service.cta}</span>
-
-                    <span className="partner-card__cta-icon">
-                        <span className="partner-card__cta-arrow-orbit">
-                            <span className="partner-card__cta-arrow">→</span>
-                        </span>
-                    </span>
-                </button>
-
-
+                    <span>{service.cta}</span>                   
+                     <SpecialButton/>
+                </button> 
             </div>
         </article>
     );

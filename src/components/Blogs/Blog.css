@@ -1,0 +1,275 @@
+/* =======================================================
+   FOLLOWERS (fantasmas detrás)
+======================================================= */
+.follower-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform: translate3d(-9999px, -9999px, 0);
+  z-index: 9990;
+}
+
+.follower-inner {
+  width: 220px;
+  height: 150px;
+  border-radius: 10px;
+  background: white;
+  filter: blur(8px);
+  transform: scale(0.8);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Contenedor principal */
+/* ------------------------------
+     LISTA DEL BLOG
+------------------------------ */
+.blog-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    grid-auto-flow: column;
+    gap: 18px;
+    align-items: center;
+    padding: 22px 0;
+  }
+
+  .blog-meta {
+    grid-column: 1;
+    font-size: 15px;
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  .blog-title {
+    grid-column: 2;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.28;
+    justify-self: start;
+    text-align: start;
+  }
+
+  .blog-reading-time {
+    grid-column: 3;
+    white-space: nowrap;
+    opacity: 0.75;
+    font-size: 15px;
+  }
+
+  .blog-action {
+    grid-column: 4;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Remuevo el info-row en desktop */
+  .blog-info-row {
+    display: contents;
+  }
+
+/* ------------------------------
+     BOTÓN (mobile)
+------------------------------ */
+.blog-row .special-button {
+  width: 38px;
+  height: 38px;
+}
+
+/* ------------------------------
+     HOVER PREVIEW
+------------------------------ */
+.preview-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 180px;
+  pointer-events: none;
+  transform: translate3d(-9999px, -9999px, 0); 
+  z-index: 99999;
+
+}
+
+
+.preview-inner {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.25s ease, transform 0.25s ease; 
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ------------------------------
+     FOLLOWERS
+------------------------------ */
+.follower-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 180px;
+  pointer-events: none;
+  transform: translate(-200px, -200px);
+  z-index: 99998;
+}
+
+.follower-inner {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.25s ease, transform 0.35s ease;
+}
+
+/* ------------------------------
+    RESPONSIVE ≤1200px
+    (ESTRUCTURA EXACTA COMO LA IMAGEN)
+------------------------------ */
+/* =======================================================
+   MOBILE FIX (≤1200px)
+   Title arriba
+   Meta + Time en la MISMA FILA
+   Botón a la derecha
+======================================================= */
+@media (max-width: 1200px) {
+  .blog-row {
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    grid-template-rows: auto auto;
+    gap: 6px 16px;
+    padding: 16px 0;
+  }
+
+  .blog-title {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  .blog-info-row {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;  /* los junta más */
+  }
+
+  .blog-meta,
+  .blog-reading-time {
+    font-size: 14px;
+    opacity: 0.78;
+    white-space: nowrap;
+  }
+
+  .blog-meta::after {
+    content: "•";
+    margin: 0 4px;
+  }
+
+  .blog-action {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+
+    display: flex;
+    justify-content: flex-end; /* dentro del bloque */
+    justify-self: end;         /* dentro del grid */
+    align-items: flex-start;
+
+    width: 100%;
+    margin-left: auto !important; /* fuerza máxima */
+  }
+}
+
+
+
+
+/* =======================================================
+   BOTÓN – AnimatedAnchorTagBlog
+======================================================= */
+.animated-button-blog {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  padding-left: 40px;
+  padding-right: 50px;
+  justify-content: space-between;
+  height: 48px;
+  font-weight: 600;
+}
+
+.animated-button-blog:hover {
+  color: white;
+}
+
+.arrow-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .25s ease, opacity .25s ease;
+  flex-shrink: 0;
+}
+
+.arrow-circle.left {
+  transform: scale(0) translateX(-20px);
+  opacity: 0;
+}
+
+.blog-row:hover .animated-button-blog .arrow-circle.left {
+  transform: scale(1) translateX(0);
+  opacity: 1;
+}
+
+.blog-row:hover .animated-button-blog .arrow-circle.right {
+  transform: scale(0) translateX(20px);
+  opacity: 0;
+}
+
+.blog-row:hover .animated-button-blog .button-text {
+  transform: translateX(12px);
+}
+
+.animated-button-blog:hover .button-text {
+  transform: translateX(12px);
+}
+
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+@media (max-width: 1200px) {
+  .blog-row {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+
+  .animated-button-blog {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .arrow-circle.right {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.anchortag-blog{
+  background: var(--magenta-800);
+}
