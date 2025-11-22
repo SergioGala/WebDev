@@ -13,6 +13,7 @@
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
               background 0.3s ease,
               backdrop-filter 0.3s ease;
+  padding-block: 3rem;
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -54,7 +55,7 @@
 .container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 3rem;
+  padding: 1.5rem 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
