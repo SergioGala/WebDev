@@ -29,10 +29,10 @@
 /* Navbar con scroll (translúcido) */
 .navbar.scrolled {
   position: fixed;
-  background: rgba(26, 29, 41, 0.95);
+ background: transparent; /* por verificar */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 0 var(--border-magenta);
 }
 
 /* Borde inferior */
@@ -43,7 +43,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-active);
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -90,7 +90,7 @@
 .logoLink {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-inverse);
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: all 0.3s ease;
@@ -99,7 +99,7 @@
 
 .logoLink:hover {
   transform: scale(1.05);
-  color: #f3f4f6;
+  color: var(--bg-elevated);
 }
 
 /* ========================================
@@ -127,7 +127,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-inverse);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 400;
@@ -151,7 +151,7 @@
 }
 
 .link:hover {
-  color: #ffffff;
+  color: var(--accent-hover);
 }
 
 .link:hover::after {

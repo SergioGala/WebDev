@@ -9,7 +9,6 @@ const LandingPage = () => {
     return (
 
         <>
-            <h1>Buenas tardes</h1>
             <PartnerSection />
             <BlogList/>
         </>
