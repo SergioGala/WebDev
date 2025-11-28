@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useScrollBehavior } from '../../hooks/useScrollBehavior';
 import useIsMobile from '../../hooks/UseIsMobile';
-import { navItems, ctaButton, logoConfig } from '../../utils/Navconfig';
+import { navItems, ctaButton, logoConfig } from '../../utils/navConfig';
 
 const Navbar = () => {
   const { isScrolled, isVisible } = useScrollBehavior(10, 200);
