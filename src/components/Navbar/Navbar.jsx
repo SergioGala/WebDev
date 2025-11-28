@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useScrollBehavior } from '../../hooks/useScrollBehavior';
-import useIsMobile from '../../hooks/useIsMobile';
+import useIsMobile from '../../hooks/UseIsMobile';
 import { navItems, ctaButton, logoConfig } from '../../utils/Navconfig';
 
 const Navbar = () => {
