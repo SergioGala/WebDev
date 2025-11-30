@@ -46,11 +46,11 @@ const Navbar = () => {
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${!isVisible ? styles.hidden : ''}`}>
       <div className={styles.container}>
         {/* Logo */}
-        <div className={styles.logo}>
+        {/* <div className={styles.logo}>
           <Link to={logoConfig.href} className={styles.logoLink}>
             {logoConfig.text}
           </Link>
-        </div>
+        </div> */}
 
         {/* Desktop Navigation */}
         <div className={styles.menu}>
